@@ -1,13 +1,18 @@
 const express = require('express');
 require('dotenv').config();
-const  configViewEngine = require('./config/viewEngine');
+const configViewEngine = require('./config/viewEngine');
 const webRouter = require('./routes/web');
 const connection = require('./config/database');
-const mongoose = require('mongoose');
+const Kitten = require('./models/kitten');
 
 const app = express();
 const port = process.env.PORT || 8888;
 const host = process.env.HOST_NAME;
+
+//config request body
+app.use(express.json()) // for json
+app.use(express.urlencoded({ extended: true })) // for form data
+
 
 //config template engine
 configViewEngine(app);
@@ -15,13 +20,6 @@ configViewEngine(app);
 //Khai báo route
 app.use('/',webRouter);
 
-const kittySchema = new mongoose.Schema({
-  name: String
-});
-
-const Kitten = mongoose.model('Kitten', kittySchema);
-const cat = new Kitten({ name: 'Hi Khoa' });
-cat.save();
 
 //test connection
 (async() => {

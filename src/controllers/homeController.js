@@ -1,8 +1,7 @@
 
 const getHomePage = (req,res) => {
-    //process data
-    //call model
-    res.send('Hi there!!!');
+    
+    return res.render('home.ejs')
 }
 
 const getABC = (req,res) => {
@@ -13,6 +12,11 @@ const getKhoa = (req,res) => {
     res.render('sample.ejs')
 }
 
+const postCreateUser = (req,res) => {
+    console.log(">> req.body",req.body);
+    res.send('create a new user');
+}
+
 module.exports = {
-    getHomePage,getABC,getKhoa
+    getHomePage,getABC,getKhoa,postCreateUser
 }
