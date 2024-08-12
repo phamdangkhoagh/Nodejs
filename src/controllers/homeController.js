@@ -17,6 +17,17 @@ const getKhoa = (req,res) => {
     res.render('sample.ejs')
 }
 
+const getCreatePage = (req,res) => {
+    res.render('create.ejs')
+}
+
+const getUpdatePage = async (req,res) => {
+    const userId = req.params.id;
+    // console.log(">> request.param",req.params,userId);
+    let user = await User.findById(userId).exec();
+    res.render('edit.ejs',{userEdit: user})
+}
+
 const postCreateUser = async (req,res) => {
     let email = req.body.email;
     let name = req.body.myName;
@@ -44,19 +55,27 @@ const postUpdateUser = async (req,res) => {
     res.redirect('/');
 }
 
-const getCreatePage = (req,res) => {
-    res.render('create.ejs')
+const postDeleteUser = async (req,res) => {
+    const userId = req.params.id;
+    let user = await User.findById(userId).exec();
+    res.render('delete.ejs',{userEdit: user})
 }
 
-const getUpdatePage = async (req,res) => {
-    const userId = req.params.id;
-    // console.log(">> request.param",req.params,userId);
-    let user = await User.findById(userId).exec();
-    res.render('edit.ejs',{userEdit: user})
+const postHandleRemoveUser = async (req,res) => {
+    const id = req.body.id;
+
+    let result = await User.deleteOne({
+        _id: id
+    })
+    
+    console.log(">> result: ",result);
+    res.redirect('/');
 }
+
+
 
 module.exports = {
     getHomePage,getABC,getKhoa,postCreateUser,getCreatePage,getUpdatePage,
-    postUpdateUser
+    postUpdateUser,postDeleteUser,postHandleRemoveUser
     
 }
