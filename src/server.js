@@ -3,7 +3,6 @@ require('dotenv').config();
 const configViewEngine = require('./config/viewEngine');
 const webRouter = require('./routes/web');
 const connection = require('./config/database');
-const Kitten = require('./models/kitten');
 
 const app = express();
 const port = process.env.PORT || 8888;

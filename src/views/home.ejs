@@ -8,32 +8,45 @@
 </head>
 <body>
     <div class="topnav">
-        <a class="active" href="#home">Home</a>
-        <a href="#news">News</a>
-        <a href="#contact">Contact</a>
-        <a href="#about">About</a>
+        <a class="active" href="/">Home</a>
+        <a href="/create">Create user</a>
     </div>
-    <div class="form-add-user">
-        <form action="/create-user"  method="POST">
-            <fieldset>
-                <legend>Form add new user</legend>
-                <div class="input-group">
-                    <label>Email:</label>
-                    <input type="text" name="email">
-                </div>
-                <div class="input-group">
-                    <label>Name:</label>
-                    <input type="text" name="myName">
-                </div>
-                <div class="input-group">
-                    <label>City:</label>
-                    <input type="text" name="city">
-                </div>
-                <div>
-                    <button>Save</button>
-                </div>
-            </fieldset>
-        </form>
+    <div class="table-container">
+        <div class="title">List Users</div>
+        <table>
+            <tr>
+              <th>ID</th>
+              <th>Email</th>
+              <th>Name</th>
+              <th>City</th>
+              <th>Action</th>
+            </tr>
+            
+            <!-- <% for (let i = 0; i < listUsers.length; i++) { %>
+              <tr>
+                <td><%= listUsers[i].id %></td>
+                <td><%= listUsers[i].email %></th>
+                <td><%= listUsers[i].name %></td>
+                <td><%= listUsers[i].city %></td>
+                <td>
+                  <button>Edit</button>
+                  <button>Delete</button>
+                </td>
+              </tr>
+            <% } %> -->
+            <% listUsers.forEach(function(user) { %>
+              <tr>
+                <td><%= user.id %></td>
+                <td><%= user.email %></th>
+                <td><%= user.name %></td>
+                <td><%= user.city %></td>
+                <td>
+                  <a href="/update/<%= user.id %>">Edit</a>
+                  <button>Delete</button>
+                </td>
+              </tr>
+           <% }); %> 
+          </table>
     </div>
 </body>
 </html>
