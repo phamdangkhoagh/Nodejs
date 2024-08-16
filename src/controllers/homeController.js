@@ -1,7 +1,7 @@
 // const connection = require('./config/database');
 const User = require('../models/user');
-const {getAllUsers} = require('../services/CRUDservices');
 
+const {getAllUsers} = require('../services/CRUDservices');
 
 const getHomePage = async(req,res) => {
     let results = await User.find({})
