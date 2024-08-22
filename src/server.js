@@ -3,6 +3,7 @@ require('dotenv').config();
 const configViewEngine = require('./config/viewEngine');
 const webRouter = require('./routes/web');
 const apiRouter = require('./routes/api');
+const fileUpload = require('express-fileupload');
 
 
 const connection = require('./config/database');
@@ -10,6 +11,9 @@ const connection = require('./config/database');
 const app = express();
 const port = process.env.PORT || 8888;
 const host = process.env.HOST_NAME;
+
+// //config file update
+app.use(fileUpload());
 
 //config request body
 app.use(express.json()) // for json
