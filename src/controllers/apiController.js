@@ -90,6 +90,7 @@ const postUploadMultiFileAPI = async (req,res) => {
     return await postUploadSingleFileAPI(req,res);
   }
 }
+
 module.exports = {
   getUserAPI,
   postCreateUserAPI,

@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
-
+const mongoose_delete = require('mongoose-delete');
 // shape data
 const customerSchema = new mongoose.Schema({
     name: {
         type : String,
-        require: true
+        required: true
     },
     address: String,
     phone: String,
@@ -14,7 +14,10 @@ const customerSchema = new mongoose.Schema({
   },
   { timestamps: true });
   
-const Customer = mongoose.model('user', customerSchema);
+// Override all methods
+customerSchema.plugin(mongoose_delete,{ overrideMethods: 'all' });
+
+const Customer = mongoose.model('Customer', customerSchema);
 
 module.exports = Customer;
 // const cat = new Kitten({ name: 'Hi Khoa' });
