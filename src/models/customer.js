@@ -12,7 +12,17 @@ const customerSchema = new mongoose.Schema({
     image: String,
     description: String,
   },
-  { timestamps: true });
+  { 
+    timestamps: true,
+    // statics: {
+    //   findByKhoa(name) {
+    //     return this.find({ name: new RegExp(name, 'i') });
+    //   },
+    //   findByNamee(name) {
+    //     return this.find({ name: new RegExp(name, 'i') });
+    //   },
+    // }
+  });
   
 // Override all methods
 customerSchema.plugin(mongoose_delete,{ overrideMethods: 'all' });
