@@ -4,7 +4,8 @@ const {
   createArrayCustomerService,
   getAllCustomersService,
   putUpdateCustomersService,
-  deleteACustomerService,deleteArrayCustomerService
+  deleteACustomerService,
+  deleteArrayCustomerService,
 } = require("../services/customerService");
 
 module.exports = {
@@ -51,10 +52,17 @@ module.exports = {
     }
   },
   getAllCustomersAPI: async (req, res) => {
-    let results = await getAllCustomersService();
+    let limit = req.query.limit;
+    let page = req.query.page;
+    let result = null;
+    if (limit && page) {
+      result = await getAllCustomersService(limit,page);
+    }else {
+      result = await getAllCustomersService();
+    }
     return res.status(200).json({
       errorCode: 0,
-      data: results,
+      data: result,
     });
   },
   putUpdateCustomerAPI: async (req, res) => {
@@ -76,12 +84,11 @@ module.exports = {
   },
   deleteArrayCustomer: async (req, res) => {
     let ids = req.body.customerId;
-    console.log("check id:",ids);
+    console.log("check id:", ids);
     let customers = await deleteArrayCustomerService(ids);
     return res.status(200).json({
       errorCode: 0,
       data: customers,
     });
-  
   },
 };

@@ -1,10 +1,11 @@
-const mongoose = require('mongoose');
-const mongoose_delete = require('mongoose-delete');
+const mongoose = require("mongoose");
+const mongoose_delete = require("mongoose-delete");
 // shape data
-const customerSchema = new mongoose.Schema({
+const customerSchema = new mongoose.Schema(
+  {
     name: {
-        type : String,
-        required: true
+      type: String,
+      required: true,
     },
     address: String,
     phone: String,
@@ -12,7 +13,7 @@ const customerSchema = new mongoose.Schema({
     image: String,
     description: String,
   },
-  { 
+  {
     timestamps: true,
     // statics: {
     //   findByKhoa(name) {
@@ -22,12 +23,13 @@ const customerSchema = new mongoose.Schema({
     //     return this.find({ name: new RegExp(name, 'i') });
     //   },
     // }
-  });
-  
-// Override all methods
-customerSchema.plugin(mongoose_delete,{ overrideMethods: 'all' });
+  }
+);
 
-const Customer = mongoose.model('Customer', customerSchema);
+// Override all methods
+customerSchema.plugin(mongoose_delete, { overrideMethods: "all" });
+
+const Customer = mongoose.model("Customer", customerSchema);
 
 module.exports = Customer;
 // const cat = new Kitten({ name: 'Hi Khoa' });

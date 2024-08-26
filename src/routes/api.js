@@ -1,37 +1,60 @@
-const express = require('express');
+const express = require("express");
 
 const routerAPI = express.Router();
 
-const {getUserAPI,postUploadSingleFileAPI,postUploadMultiFileAPI,
-    putUpdateUserAPI,deleteUserAPI,postCreateUserAPI} = require('../controllers/apiController');
+const {
+  getUserAPI,
+  postUploadSingleFileAPI,
+  postUploadMultiFileAPI,
+  putUpdateUserAPI,
+  deleteUserAPI,
+  postCreateUserAPI,
+} = require("../controllers/apiController");
 
-const {postCreateCustomer,postCreateArrayCustomer,getAllCustomersAPI, putUpdateCustomerAPI,deleteACustomer,deleteArrayCustomer} = require('../controllers/customerController');
+const {
+  postCreateCustomer,
+  postCreateArrayCustomer,
+  getAllCustomersAPI,
+  putUpdateCustomerAPI,
+  deleteACustomer,
+  deleteArrayCustomer,
+} = require("../controllers/customerController");
 
-routerAPI.get('/users', getUserAPI);
+routerAPI.get("/users", getUserAPI);
 
-routerAPI.post('/users', postCreateUserAPI);
+routerAPI.post("/users", postCreateUserAPI);
 
-routerAPI.put('/users', putUpdateUserAPI);
+routerAPI.put("/users", putUpdateUserAPI);
 
-routerAPI.delete('/users', deleteUserAPI);
+routerAPI.delete("/users", deleteUserAPI);
 
-routerAPI.post('/file', postUploadSingleFileAPI);
+routerAPI.post("/file", postUploadSingleFileAPI);
 
-routerAPI.post('/files', postUploadMultiFileAPI);
+routerAPI.post("/files", postUploadMultiFileAPI);
 
-routerAPI.post('/customers', postCreateCustomer);
+routerAPI.post("/customers", postCreateCustomer);
 
-routerAPI.post('/customers-many', postCreateArrayCustomer);
+routerAPI.post("/customers-many", postCreateArrayCustomer);
 
-routerAPI.get('/customers', getAllCustomersAPI);
-routerAPI.put('/customers', putUpdateCustomerAPI);
-routerAPI.delete('/customers', deleteACustomer);
-routerAPI.delete('/customers-many', deleteArrayCustomer);
+routerAPI.get("/customers", getAllCustomersAPI);
+routerAPI.put("/customers", putUpdateCustomerAPI);
+routerAPI.delete("/customers", deleteACustomer);
+routerAPI.delete("/customers-many", deleteArrayCustomer);
 
+routerAPI.get("/info", (req, res) => {
+  console.log(">> check query", req.query);
+  return res.status(200).json({
+    data: req.query,
+  });
+});
 
-
-
-
+routerAPI.get("/info/:name/:address", (req, res) => {
+    console.log(">> check params", req.params);
+    return res.status(200).json({
+      data: req.params,
+    });
+  });
+  
 
 
 
