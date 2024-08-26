@@ -8,6 +8,8 @@ const {
   deleteArrayCustomerService,
 } = require("../services/customerService");
 
+const aqp = require("api-query-params");
+
 module.exports = {
   postCreateCustomer: async (req, res) => {
     let { name, address, phone, email, description } = req.body;
@@ -52,12 +54,14 @@ module.exports = {
     }
   },
   getAllCustomersAPI: async (req, res) => {
+    
     let limit = req.query.limit;
     let page = req.query.page;
+    let name = req.query.name;
     let result = null;
     if (limit && page) {
-      result = await getAllCustomersService(limit,page);
-    }else {
+      result = await getAllCustomersService(limit, page, name, req.query);
+    } else {
       result = await getAllCustomersService();
     }
     return res.status(200).json({
